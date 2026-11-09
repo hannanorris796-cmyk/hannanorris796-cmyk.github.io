@@ -89,7 +89,7 @@
     nodesLayer.append(box);nodeEls.set(id,box);
     pos.set(id,{x,y,w,h,panelIndex:panels.findIndex(p=>x>=p.x&&x<p.x+p.w)});return box;
   }
-  function addEdge(source,target,kind){edges.push({source,target,kind})}
+  function addEdge(source,target,kind,inferred=false){edges.push({source,target,kind,inferred})}
   function unique(items){return [...new Set(items)]}
   function build(){
     const bands=[];let cursor=158;
@@ -144,14 +144,16 @@
     const kstep=Math.min(104,available/Math.max(1,knowledge.length));
     knowledge.forEach((k,i)=>{const id='k'+i;knowledgeIds.set(k,id);addNode(id,k,'knowledge',knowledgeX,150+i*kstep,246,40)});
     data.roles.forEach(role=>role.tasks.forEach(task=>{
-      task.skills.forEach(s=>addEdge(task.id,skillIds.get(s),'task-skill'));
+      task.skills.forEach(s=>addEdge(task.id,skillIds.get(s),'task-skill',(task.inferred_skills||[]).includes(s)));
       task.qualities.forEach(q=>addEdge(task.id,qualityIds.get(q),'task-quality'));
     }));
     skills.forEach(s=>(learning[s]||[]).forEach(k=>addEdge(skillIds.get(s),knowledgeIds.get(k),'skill-knowledge')));
     svg.setAttribute('height',H);
     edges.forEach(edge=>{
       const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('class','pan-edge '+edge.kind);svg.append(path);edge.el=path;
+      path.setAttribute('class','pan-edge '+edge.kind+(edge.inferred?' inferred':''));
+      if(edge.inferred){const title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent='根据岗位技能与工作任务推断的关联';path.append(title)}
+      svg.append(path);edge.el=path;
     });
     document.getElementById('pathHint').textContent=`${unique(chain.map(n=>n.industry)).length} 条产业链 · ${leaves.length} 个末级节点 · 1 个专业 · ${data.roles.length} 种岗位 · ${skills.length} 项技能 · ${qualities.length} 项素养 · ${knowledge.length} 个知识点`;
     applyScale();updateFocus();

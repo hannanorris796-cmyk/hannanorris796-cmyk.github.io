@@ -28,10 +28,16 @@
 .embedded .graph-scroll{height:100%;min-height:0}
 .embedded #fullscreenView{display:none}
 .map-name #pathHint{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.map-name #resetView{margin-left:0}
 .map-name #zoomOut,.map-name #zoomIn{min-width:30px;height:28px;border:1px solid #27a9ed;border-radius:5px;background:#083d9a;color:#e7faff;font-size:18px;font-weight:700;cursor:pointer}
 .map-name #zoomOut:hover,.map-name #zoomIn:hover{background:#0e5bb7}
 .pan-node{font-size:15px}
 .pan-node.chain,.pan-node.knowledge{font-size:14px}
 .pan-node.task{font-size:14px;line-height:1.18;padding:4px 8px}
 .pan-group-label{font-size:15px}
+.map-name{min-width:0;overflow:hidden}
+.map-name i,.map-name #resetView,.map-name #fullscreenView,.map-name #zoomValue{flex:none}
+.map-name strong{flex:0 1 auto;min-width:0;max-width:35%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.map-name #pathHint{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.map-name #resetView{margin-left:0}
+.pan-edge.inferred{stroke-dasharray:none;opacity:.14}
+.pan-edge.inferred.focused{stroke-dasharray:none;opacity:.92}
