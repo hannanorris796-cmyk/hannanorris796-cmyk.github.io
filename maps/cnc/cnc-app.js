@@ -1,6 +1,22 @@
 (() => {
   const data=window.GRAPH_DATA,$=id=>document.getElementById(id);
   let selectedNode='126',selectedRole='126-CNC技术员';
+  let zoom=document.documentElement.classList.contains('embedded')?.75:1;
+  const zoomMin=.5,zoomMax=1.5,baseHeight=document.documentElement.classList.contains('embedded')?600:900;
+  function setZoom(value){
+    zoom=Math.min(zoomMax,Math.max(zoomMin,Math.round(value*100)/100));
+    const graph=$('graph'),stage=$('graphStage');
+    graph.style.transform=`scale(${zoom})`;
+    graph.style.height=`${baseHeight}px`;
+    const contentHeight=Math.max(baseHeight,graph.scrollHeight);
+    graph.style.height=`${contentHeight}px`;
+    stage.style.width=`${Math.ceil(graph.scrollWidth*zoom)}px`;
+    stage.style.height=`${Math.ceil(contentHeight*zoom)}px`;
+    $('zoomValue').textContent=`${Math.round(zoom*100)}%`;
+    $('zoomOut').disabled=zoom<=zoomMin;
+    $('zoomIn').disabled=zoom>=zoomMax;
+    requestAnimationFrame(drawEdges);
+  }
   const expanded={'人工智能产业':true,'新能源汽车':true};
   const headings=['产业链节点','专业','岗位','工作任务','岗位能力','技能&知识点'];
   const currentNode=()=>data.nodes.find(n=>n.id===selectedNode)||data.nodes[0];
@@ -77,7 +93,7 @@
         body.append(card);
       }
       column.append(body);columns.append(column);
-    });requestAnimationFrame(drawEdges);
+    });requestAnimationFrame(()=>setZoom(zoom));
   }
   function drawEdges(){
     const graph=$('graph'),svg=$('edges'),bounds=graph.getBoundingClientRect(),job=currentRole();svg.replaceChildren();
@@ -93,7 +109,7 @@
     pairs.forEach(([from,to,kind])=>{
       const a=graph.querySelector(`[data-id="${CSS.escape(from)}"]`),b=graph.querySelector(`[data-id="${CSS.escape(to)}"]`);if(!a||!b)return;
       const ar=a.getBoundingClientRect(),br=b.getBoundingClientRect();
-      const x1=ar.right-bounds.left,y1=ar.top+ar.height/2-bounds.top,x2=br.left-bounds.left,y2=br.top+br.height/2-bounds.top;
+      const x1=(ar.right-bounds.left)/zoom,y1=(ar.top+ar.height/2-bounds.top)/zoom,x2=(br.left-bounds.left)/zoom,y2=(br.top+br.height/2-bounds.top)/zoom;
       const c=Math.max(25,(x2-x1)*.44),path=document.createElementNS('http://www.w3.org/2000/svg','path');
       const d=kind==='feed'&&from===nev.id?`M${x1} ${y1} C${x1+c} ${Math.max(y1,y2)+65},${x2-c} ${Math.max(y1,y2)+65},${x2} ${y2}`:`M${x1} ${y1} C${x1+c} ${y1},${x2-c} ${y2},${x2} ${y2}`;
       path.setAttribute('d',d);path.setAttribute('class',`edge ${kind}`);svg.append(path);
@@ -103,6 +119,14 @@
       }
     });
   }
+  $('zoomOut').onclick=()=>setZoom(zoom-.1);
+  $('zoomIn').onclick=()=>setZoom(zoom+.1);
+  $('zoomFit').onclick=()=>setZoom((document.querySelector('.graph-scroll').clientWidth-24)/$('graph').scrollWidth);
+  document.querySelector('.graph-scroll').addEventListener('wheel',event=>{
+    if(!event.ctrlKey)return;
+    event.preventDefault();
+    setZoom(zoom+(event.deltaY<0?.1:-.1));
+  },{passive:false});
   new ResizeObserver(()=>requestAnimationFrame(drawEdges)).observe($('graph'));
   window.addEventListener('resize',()=>requestAnimationFrame(drawEdges));render();
 })();

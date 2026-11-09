@@ -29,3 +29,13 @@
 .embedded .columns{min-height:570px}
 .embedded .column-body{justify-content:flex-start}
 .embedded .column-0 .column-body{padding-top:70px}
+
+.graph-stage{position:relative;min-width:0;min-height:0}
+.graph-stage .graph{position:absolute;top:0;left:0;width:2100px;min-width:2100px;transform-origin:top left}
+.map-name #pathHint{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.zoom-controls{display:flex;align-items:center;gap:4px;margin-left:auto;padding:3px;border:1px solid #2878c8;border-radius:8px;background:#041d5dcc;white-space:nowrap}
+.zoom-controls button{min-width:32px;height:27px;padding:0 7px;border:1px solid #2a7bd0;border-radius:5px;background:#0b3d92;color:#e8f7ff;font-size:18px;font-weight:700;cursor:pointer}
+.zoom-controls button:last-child{font-size:12px;min-width:39px}
+.zoom-controls button:hover:not(:disabled){background:#1361c8}
+.zoom-controls button:disabled{opacity:.45;cursor:default}
+.zoom-controls output{min-width:42px;text-align:center;font-size:12px;font-weight:700;color:#8deaff}
