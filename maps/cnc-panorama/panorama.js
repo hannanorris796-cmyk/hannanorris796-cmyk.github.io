@@ -73,8 +73,8 @@
   const panels=[...chainPanels,
     {label:'专业',x:majorX,w:150},{label:'岗位',x:majorX+166,w:160},
     {label:'工作任务',x:majorX+342,w:350},
-    {label:'岗位能力 · 技能 / 素养',x:majorX+708,w:260},
-    {label:'技能&知识点',x:majorX+984,w:270}
+    {label:'岗位能力',x:majorX+708,w:260},
+    {label:'知识点',x:majorX+984,w:270}
   ];
   const W=majorX+1276,pos=new Map(),nodeEls=new Map(),edges=[];
   let H=4200,scale=1,layoutExtra=0,selected=null,dragging=false,dragStart=null,suppressClick=false;
