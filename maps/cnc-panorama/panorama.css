@@ -8,21 +8,30 @@
 .pan-node.ability-skill{justify-content:flex-start;background:linear-gradient(180deg,#0b459b,#082a73);border-color:#258ce3}
 .pan-node.ability-quality{justify-content:flex-start;background:linear-gradient(180deg,#164487,#0d316d);border-color:#428abd}
 .pan-group-label{position:absolute;color:#69eaff;font-size:13px;font-weight:700;letter-spacing:.08em;border-bottom:1px solid #298ac4;padding-bottom:5px;z-index:3;pointer-events:none}
-.pan-edge.role-skill,.pan-edge.role-quality{opacity:.38}
-.pan-edge.skill-knowledge{stroke:#64dafa;opacity:.4}
-.map-name #zoomOut,.map-name #zoomIn{min-width:30px;height:28px;border:1px solid #27a9ed;border-radius:5px;background:#083d9a;color:#e7faff;font-size:18px;font-weight:700;cursor:pointer}
-.map-name #zoomOut:hover,.map-name #zoomIn:hover{background:#0e5bb7}
-.map-name #pathHint{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.map-name #resetView{margin-left:0}
+.pan-edge.task-skill,.pan-edge.task-quality{opacity:.14}
+.pan-edge.skill-knowledge{stroke:#64dafa;opacity:.28}
+.pan-edge.task-skill.focused,.pan-edge.task-quality.focused,.pan-edge.skill-knowledge.focused{opacity:.92}
+.pan-fixed-headers{position:fixed;height:44px;overflow:hidden;z-index:50;pointer-events:none;background:linear-gradient(180deg,#051d5df2,#051d5dd8)}
+.pan-fixed-heading{position:absolute;top:0;height:39px;box-sizing:border-box;display:flex;align-items:center;padding:0 11px;background:linear-gradient(90deg,#0b4bc8,#08277e);border:1px solid #2588e8;border-bottom:2px solid #32dcff;border-radius:3px 3px 0 0;color:#f2fbff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 3px 10px #00164a}
+.map-name #fullscreenView{background:#083d9a;border:1px solid #27a9ed;border-radius:5px;color:#e7faff;padding:6px 16px;font-weight:700;cursor:pointer}
+.map-name #fullscreenView:hover{background:#0e5bb7}
+.app:fullscreen{height:100vh;min-height:0;display:flex;flex-direction:column;background:linear-gradient(180deg,#03144eb8,#021347e5),url('background.png') center/cover}
+.app:fullscreen #viewport{height:auto;min-height:0;flex:1}
 .viewport-shell{position:relative}
 .pan-fixed-headers{position:absolute;top:1px;left:1px;height:44px;overflow:hidden;z-index:50;pointer-events:none;background:#051d5d}
+.app:fullscreen .viewport-shell{flex:1;min-height:0}
+.app:fullscreen #viewport{height:100%;min-height:0}
 .embedded body{overflow:hidden}
 .embedded .app{height:100vh;min-height:0;padding:12px 16px 8px;display:flex;flex-direction:column}
 .embedded header,.embedded .map-name,.embedded footer{flex:none}
 .embedded .viewport-shell{flex:1;min-height:0}
 .embedded .graph-scroll{height:100%;min-height:0}
+.embedded #fullscreenView{display:none}
+.map-name #pathHint{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.map-name #resetView{margin-left:0}
+.map-name #zoomOut,.map-name #zoomIn{min-width:30px;height:28px;border:1px solid #27a9ed;border-radius:5px;background:#083d9a;color:#e7faff;font-size:18px;font-weight:700;cursor:pointer}
+.map-name #zoomOut:hover,.map-name #zoomIn:hover{background:#0e5bb7}
 .pan-node{font-size:15px}
 .pan-node.chain,.pan-node.knowledge{font-size:14px}
 .pan-node.task{font-size:14px;line-height:1.18;padding:4px 8px}
 .pan-group-label{font-size:15px}
-.pan-fixed-heading{position:absolute;top:0;height:39px;box-sizing:border-box;display:flex;align-items:center;padding:0 11px;background:linear-gradient(90deg,#0b4bc8,#08277e);border:1px solid #2588e8;border-bottom:2px solid #32dcff;border-radius:3px 3px 0 0;color:#f2fbff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 3px 10px #00164a}

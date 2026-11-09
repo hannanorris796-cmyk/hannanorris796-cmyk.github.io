@@ -77,7 +77,8 @@
     {label:'技能&知识点',x:majorX+984,w:270}
   ];
   const W=majorX+1276,pos=new Map(),nodeEls=new Map(),edges=[];
-  let H=4200,scale=1,selected=null,dragging=false,dragStart=null,suppressClick=false;
+  let H=4200,scale=1,layoutExtra=0,selected=null,dragging=false,dragStart=null,suppressClick=false;
+  const groupLabels=[];
   const elem=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
   const fixedHeaders=document.getElementById('fixedHeaders');
   function addNode(id,label,kind,x,y,w,h){
@@ -85,7 +86,8 @@
     box.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
     box.dataset.id=id;
     box.addEventListener('click',e=>{e.stopPropagation();if(suppressClick)return;selected=selected===id?null:id;updateFocus()});
-    nodesLayer.append(box);nodeEls.set(id,box);pos.set(id,{x,y,w,h});return box;
+    nodesLayer.append(box);nodeEls.set(id,box);
+    pos.set(id,{x,y,w,h,panelIndex:panels.findIndex(p=>x>=p.x&&x<p.x+p.w)});return box;
   }
   function addEdge(source,target,kind){edges.push({source,target,kind})}
   function unique(items){return [...new Set(items)]}
@@ -100,7 +102,7 @@
     panels.forEach(p=>{
       const panel=elem('section','pan-panel');
       panel.style.cssText=`left:${p.x}px;top:28px;width:${p.w}px;height:${H-56}px`;
-      nodesLayer.append(panel);
+      nodesLayer.append(panel);p.el=panel;
       const heading=elem('div','pan-fixed-heading',p.label);fixedHeaders.append(heading);p.heading=heading;
     });
     const mid=H/2,chain=data.chain;
@@ -114,11 +116,10 @@
       const panel=chainPanels[n.depth];
       const box=addNode('c'+n.code,n.label,'chain'+(n.placeholder?' placeholder':''),panel.x+10,y-24,panel.w-20,48);
       box.title=n.placeholder?'原表未提供此层节点名称，以编码占位':n.code;
-      const parent=chain.find(candidate=>candidate.code===n.parent);
-      if(parent&&parent.depth===n.depth-1)addEdge('c'+n.parent,'c'+n.code,'hierarchy');
+      if(n.parent)addEdge('c'+n.parent,'c'+n.code,'hierarchy');
     });
     addNode('major',data.major,'major',panels[maxDepth+1].x+10,mid-27,130,54);
-    leaves.filter(n=>n.depth===maxDepth).forEach(n=>addEdge('c'+n.code,'major','chain-map'));
+    leaves.forEach(n=>addEdge('c'+n.code,'major','chain-map'));
     bands.forEach(({role,top,center})=>{
       addNode(role.id,role.label,'role',panels[maxDepth+2].x+12,center-24,136,48);
       addEdge('major',role.id,'major-role');
@@ -133,7 +134,7 @@
     const available=H-250,step=Math.min(116,available/(skills.length+qualities.length+2));
     let y=150;
     const abilityX=panels[maxDepth+4].x+12,knowledgeX=panels[maxDepth+5].x+12;
-    function groupLabel(text,top){const label=elem('div','pan-group-label',text);label.style.cssText=`left:${abilityX}px;top:${top}px;width:236px`;nodesLayer.append(label)}
+    function groupLabel(text,top){const label=elem('div','pan-group-label',text);label.style.cssText=`left:${abilityX}px;top:${top}px;width:236px`;nodesLayer.append(label);groupLabels.push({el:label,x:abilityX,panelIndex:maxDepth+4})}
     groupLabel(`技能 · ${skills.length}`,120);
     const skillIds=new Map(),qualityIds=new Map(),knowledgeIds=new Map();
     skills.forEach((s,i)=>{const id='s'+i;skillIds.set(s,id);addNode(id,s,'ability-skill',abilityX,y,236,40);y+=step});
@@ -142,39 +143,53 @@
     qualities.forEach((q,i)=>{const id='q'+i;qualityIds.set(q,id);addNode(id,q,'ability-quality',abilityX,y,236,40);y+=step});
     const kstep=Math.min(104,available/Math.max(1,knowledge.length));
     knowledge.forEach((k,i)=>{const id='k'+i;knowledgeIds.set(k,id);addNode(id,k,'knowledge',knowledgeX,150+i*kstep,246,40)});
-    // 岗位能力只有岗位级归属，源数据未给出每项工作任务对应的具体能力。
-    // 因此不画跨过“工作任务”列的岗位→能力连线，也不推断任务→能力连线。
+    data.roles.forEach(role=>role.tasks.forEach(task=>{
+      task.skills.forEach(s=>addEdge(task.id,skillIds.get(s),'task-skill'));
+      task.qualities.forEach(q=>addEdge(task.id,qualityIds.get(q),'task-quality'));
+    }));
     skills.forEach(s=>(learning[s]||[]).forEach(k=>addEdge(skillIds.get(s),knowledgeIds.get(k),'skill-knowledge')));
-    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.setAttribute('height',H);
+    svg.setAttribute('height',H);
     edges.forEach(edge=>{
-      const a=pos.get(edge.source),b=pos.get(edge.target);if(!a||!b)return;
-      const x1=a.x+a.w,y1=a.y+a.h/2,x2=b.x,y2=b.y+b.h/2,c=Math.max(20,(x2-x1)*.45);
       const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d',`M${x1} ${y1} C${x1+c} ${y1},${x2-c} ${y2},${x2} ${y2}`);
       path.setAttribute('class','pan-edge '+edge.kind);svg.append(path);edge.el=path;
     });
     document.getElementById('pathHint').textContent=`${unique(chain.map(n=>n.industry)).length} 条产业链 · ${leaves.length} 个末级节点 · 1 个专业 · ${data.roles.length} 种岗位 · ${skills.length} 项技能 · ${qualities.length} 项素养 · ${knowledge.length} 个知识点`;
     applyScale();updateFocus();
   }
   function focusEdges(id){
-    if(!id)return new Set(edges);
-    if(id==='major')return new Set(edges);
+    if(!id||id==='major')return new Set(edges);
     const skills=unique(data.roles.flatMap(r=>r.skills));
     const qualities=unique(data.roles.flatMap(r=>r.qualities));
-    let roles=[];
-    if(id.startsWith('c'))roles=data.roles.filter(r=>r.contexts.some(code=>code.startsWith(id.slice(1))));
-    else if(id.startsWith('r'))roles=data.roles.filter(r=>r.id===id||r.tasks.some(t=>t.id===id));
-    else if(id.startsWith('s'))roles=data.roles.filter(r=>r.skills.includes(skills[Number(id.slice(1))]));
-    else if(id.startsWith('q'))roles=data.roles.filter(r=>r.qualities.includes(qualities[Number(id.slice(1))]));
-    else if(id.startsWith('k')){
-      const knowledge=unique(skills.flatMap(s=>learning[s]||[]));
-      const target=knowledge[Number(id.slice(1))];
-      roles=data.roles.filter(r=>r.skills.some(s=>(learning[s]||[]).includes(target)));
-    }
-    const roleIds=new Set(roles.map(r=>r.id));
-    const skillIds=new Set(roles.flatMap(r=>r.skills).map(s=>'s'+skills.indexOf(s)));
+    const knowledge=unique(skills.flatMap(s=>learning[s]||[]));
+    const chosenSkill=id.startsWith('s')?skills[Number(id.slice(1))]:null;
+    const chosenQuality=id.startsWith('q')?qualities[Number(id.slice(1))]:null;
+    const chosenKnowledge=id.startsWith('k')?knowledge[Number(id.slice(1))]:null;
+    const chosenTask=id.startsWith('r')&&id.includes('t')?id:null;
     const chainCode=id.startsWith('c')?id.slice(1):null;
     const selectedChain=data.chain.find(n=>n.code===chainCode);
+    const pairs=[];
+    data.roles.forEach(role=>role.tasks.forEach(task=>{
+      let keep=false;
+      if(selectedChain)keep=role.contexts.some(code=>code.startsWith(chainCode));
+      else if(chosenTask)keep=task.id===chosenTask;
+      else if(id===role.id)keep=true;
+      else if(chosenSkill)keep=task.skills.includes(chosenSkill);
+      else if(chosenQuality)keep=task.qualities.includes(chosenQuality);
+      else if(chosenKnowledge)keep=task.skills.some(s=>(learning[s]||[]).includes(chosenKnowledge));
+      if(keep)pairs.push({role,task});
+    }));
+    const roles=unique(pairs.map(pair=>pair.role));
+    const roleIds=new Set(roles.map(r=>r.id));
+    const taskIds=new Set(pairs.map(pair=>pair.task.id));
+    const activeSkills=chosenSkill?[chosenSkill]:chosenKnowledge?
+      skills.filter(s=>(learning[s]||[]).includes(chosenKnowledge)&&pairs.some(pair=>pair.task.skills.includes(s))):
+      chosenQuality?[]:unique(pairs.flatMap(pair=>pair.task.skills));
+    const activeQualities=chosenQuality?[chosenQuality]:chosenSkill||chosenKnowledge?[]:
+      unique(pairs.flatMap(pair=>pair.task.qualities));
+    const activeKnowledge=chosenKnowledge?[chosenKnowledge]:unique(activeSkills.flatMap(s=>learning[s]||[]));
+    const skillIds=new Set(activeSkills.map(s=>'s'+skills.indexOf(s)));
+    const qualityIds=new Set(activeQualities.map(q=>'q'+qualities.indexOf(q)));
+    const knowledgeIds=new Set(activeKnowledge.map(k=>'k'+knowledge.indexOf(k)));
     const roleContexts=unique(roles.flatMap(r=>r.contexts));
     const chainIds=new Set(data.chain.filter(n=>selectedChain
       ?n.code.startsWith(chainCode)||chainCode.startsWith(n.code)
@@ -184,8 +199,10 @@
       if(edge.kind==='hierarchy')return chainIds.has(edge.source)&&chainIds.has(edge.target);
       if(edge.kind==='chain-map')return chainIds.has(edge.source);
       if(edge.kind==='major-role')return roleIds.has(edge.target);
-      if(edge.kind==='role-task')return roleIds.has(edge.source);
-      if(edge.kind==='skill-knowledge')return skillIds.has(edge.source);
+      if(edge.kind==='role-task')return taskIds.has(edge.target);
+      if(edge.kind==='task-skill')return taskIds.has(edge.source)&&skillIds.has(edge.target);
+      if(edge.kind==='task-quality')return taskIds.has(edge.source)&&qualityIds.has(edge.target);
+      if(edge.kind==='skill-knowledge')return skillIds.has(edge.source)&&knowledgeIds.has(edge.target);
       return edge.source===id||edge.target===id;
     }));
   }
@@ -197,28 +214,51 @@
       edge.el.classList.toggle('focused',!!selected&&show);
       if(show){visible.add(edge.source);visible.add(edge.target)}
     });
-    if(selected){
-      const skills=unique(data.roles.flatMap(role=>role.skills));
-      const qualities=unique(data.roles.flatMap(role=>role.qualities));
-      data.roles.filter(role=>visible.has(role.id)).forEach(role=>{
-        role.skills.forEach(skill=>visible.add('s'+skills.indexOf(skill)));
-        role.qualities.forEach(quality=>visible.add('q'+qualities.indexOf(quality)));
-      });
-    }
     nodeEls.forEach((node,id)=>{
       node.classList.toggle('selected',selected===id);
       node.classList.toggle('muted',!!selected&&!visible.has(id)&&selected!==id);
     });
   }
   function applyScale(){
-    stage.style.width=W*scale+'px';stage.style.height=H*scale+'px';graph.style.transform=`scale(${scale})`;
+    // 节点始终等比缩放；缩小后只把列间距均匀展开，填满可视宽度。
+    layoutExtra=Math.max(0,viewport.clientWidth/scale-W);
+    const worldWidth=W+layoutExtra;
+    stage.style.width=worldWidth*scale+'px';stage.style.height=H*scale+'px';
+    graph.style.width=worldWidth+'px';graph.style.transform=`scale(${scale})`;
+    panels.forEach((p,i)=>p.el.style.left=(p.x+columnShift(i))+'px');
+    nodeEls.forEach((node,id)=>{
+      const item=pos.get(id);node.style.left=(item.x+columnShift(item.panelIndex))+'px';
+    });
+    groupLabels.forEach(item=>item.el.style.left=(item.x+columnShift(item.panelIndex))+'px');
+    svg.setAttribute('viewBox',`0 0 ${worldWidth} ${H}`);svg.setAttribute('width',worldWidth);
+    updateFrozenPositions(false);
+    drawEdges();
     document.getElementById('zoomValue').textContent=Math.round(scale*100)+'%';
     updateHeaders();
   }
+  function columnShift(index){return index<0?0:index*layoutExtra/(panels.length-1)}
+  function frozen(id){return id==='major'||id.startsWith('c')}
+  function frozenDelta(){return (viewport.scrollTop+viewport.clientHeight/2)/scale-H/2}
+  function drawEdges(onlyFrozen=false){
+    const delta=frozenDelta();
+    edges.forEach(edge=>{
+      if(onlyFrozen&&!frozen(edge.source)&&!frozen(edge.target))return;
+      const a=pos.get(edge.source),b=pos.get(edge.target);if(!a||!b)return;
+      const x1=a.x+columnShift(a.panelIndex)+a.w,y1=a.y+a.h/2+(frozen(edge.source)?delta:0);
+      const x2=b.x+columnShift(b.panelIndex),y2=b.y+b.h/2+(frozen(edge.target)?delta:0);
+      const c=Math.max(20,(x2-x1)*.45);
+      edge.el.setAttribute('d',`M${x1} ${y1} C${x1+c} ${y1},${x2-c} ${y2},${x2} ${y2}`);
+    });
+  }
+  function updateFrozenPositions(redraw=true){
+    const delta=frozenDelta();
+    nodeEls.forEach((node,id)=>{if(frozen(id))node.style.top=(pos.get(id).y+delta)+'px'});
+    if(redraw)drawEdges(true);
+  }
   function updateHeaders(){
     fixedHeaders.style.width=viewport.clientWidth+'px';
-    panels.forEach(p=>{
-      p.heading.style.left=(p.x*scale-viewport.scrollLeft)+'px';
+    panels.forEach((p,i)=>{
+      p.heading.style.left=((p.x+columnShift(i))*scale-viewport.scrollLeft)+'px';
       p.heading.style.width=(p.w*scale)+'px';
       p.heading.style.fontSize=Math.max(12,Math.min(19,17*scale))+'px';
     });
@@ -226,16 +266,17 @@
   function centerView(){
     viewport.scrollLeft=0;
     viewport.scrollTop=Math.max(0,(H*scale-viewport.clientHeight)/2);
+    updateFrozenPositions();
   }
   viewport.addEventListener('wheel',e=>{
     e.preventDefault();const rect=viewport.getBoundingClientRect(),px=e.clientX-rect.left,py=e.clientY-rect.top;
     const wx=(viewport.scrollLeft+px)/scale,wy=(viewport.scrollTop+py)/scale;
     scale=Math.max(.28,Math.min(1.6,scale*(e.deltaY<0?1.1:.9)));applyScale();
     viewport.scrollLeft=wx*scale-px;viewport.scrollTop=wy*scale-py;
-    updateHeaders();
+    updateFrozenPositions();updateHeaders();
   },{passive:false});
-  viewport.addEventListener('scroll',updateHeaders);
-  window.addEventListener('resize',updateHeaders);
+  viewport.addEventListener('scroll',()=>{updateHeaders();updateFrozenPositions()});
+  window.addEventListener('resize',applyScale);
   viewport.addEventListener('pointerdown',e=>{
     if(e.target.closest('.pan-node'))return;
     dragging=true;suppressClick=false;dragStart={x:e.clientX,y:e.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};
@@ -249,8 +290,19 @@
   viewport.addEventListener('pointerup',()=>{dragging=false;viewport.classList.remove('dragging');setTimeout(()=>suppressClick=false,0)});
   viewport.addEventListener('click',e=>{if(suppressClick)return;if(!e.target.closest('.pan-node')){selected=null;updateFocus()}});
   document.getElementById('resetView').onclick=()=>{selected=null;scale=1;applyScale();centerView();updateFocus()};
-  document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.28,scale*.9);applyScale()};
-  document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.6,scale*1.1);applyScale()};
+  document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.28,scale*.9);applyScale();updateFrozenPositions()};
+  document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.6,scale*1.1);applyScale();updateFrozenPositions()};
+  const fullscreenButton=document.getElementById('fullscreenView');
+  fullscreenButton.onclick=async()=>{
+    if(document.fullscreenElement)await document.exitFullscreen();
+    else await document.querySelector('.app').requestFullscreen();
+  };
+  document.addEventListener('fullscreenchange',()=>{
+    const active=!!document.fullscreenElement;
+    fullscreenButton.textContent=active?'退出全屏':'全屏';
+    fullscreenButton.setAttribute('aria-label',active?'退出全屏':'进入全屏');
+    requestAnimationFrame(()=>{applyScale();updateFrozenPositions()});
+  });
   document.getElementById('mapTitle').textContent=data.title;
   document.getElementById('sourceText').textContent=`数据来源：${data.source}；知识点由岗位技能推导`;
   build();requestAnimationFrame(centerView);
