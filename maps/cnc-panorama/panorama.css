@@ -21,4 +21,8 @@
 .embedded header,.embedded .map-name,.embedded footer{flex:none}
 .embedded .viewport-shell{flex:1;min-height:0}
 .embedded .graph-scroll{height:100%;min-height:0}
+.pan-node{font-size:15px}
+.pan-node.chain,.pan-node.knowledge{font-size:14px}
+.pan-node.task{font-size:14px;line-height:1.18;padding:4px 8px}
+.pan-group-label{font-size:15px}
 .pan-fixed-heading{position:absolute;top:0;height:39px;box-sizing:border-box;display:flex;align-items:center;padding:0 11px;background:linear-gradient(90deg,#0b4bc8,#08277e);border:1px solid #2588e8;border-bottom:2px solid #32dcff;border-radius:3px 3px 0 0;color:#f2fbff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 3px 10px #00164a}

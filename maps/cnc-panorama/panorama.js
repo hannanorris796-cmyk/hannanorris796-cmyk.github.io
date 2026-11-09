@@ -114,10 +114,11 @@
       const panel=chainPanels[n.depth];
       const box=addNode('c'+n.code,n.label,'chain'+(n.placeholder?' placeholder':''),panel.x+10,y-24,panel.w-20,48);
       box.title=n.placeholder?'原表未提供此层节点名称，以编码占位':n.code;
-      if(n.parent)addEdge('c'+n.parent,'c'+n.code,'hierarchy');
+      const parent=chain.find(candidate=>candidate.code===n.parent);
+      if(parent&&parent.depth===n.depth-1)addEdge('c'+n.parent,'c'+n.code,'hierarchy');
     });
     addNode('major',data.major,'major',panels[maxDepth+1].x+10,mid-27,130,54);
-    leaves.forEach(n=>addEdge('c'+n.code,'major','chain-map'));
+    leaves.filter(n=>n.depth===maxDepth).forEach(n=>addEdge('c'+n.code,'major','chain-map'));
     bands.forEach(({role,top,center})=>{
       addNode(role.id,role.label,'role',panels[maxDepth+2].x+12,center-24,136,48);
       addEdge('major',role.id,'major-role');
@@ -141,10 +142,8 @@
     qualities.forEach((q,i)=>{const id='q'+i;qualityIds.set(q,id);addNode(id,q,'ability-quality',abilityX,y,236,40);y+=step});
     const kstep=Math.min(104,available/Math.max(1,knowledge.length));
     knowledge.forEach((k,i)=>{const id='k'+i;knowledgeIds.set(k,id);addNode(id,k,'knowledge',knowledgeX,150+i*kstep,246,40)});
-    data.roles.forEach(role=>{
-      role.skills.forEach(s=>addEdge(role.id,skillIds.get(s),'role-skill'));
-      role.qualities.forEach(q=>addEdge(role.id,qualityIds.get(q),'role-quality'));
-    });
+    // 岗位能力只有岗位级归属，源数据未给出每项工作任务对应的具体能力。
+    // 因此不画跨过“工作任务”列的岗位→能力连线，也不推断任务→能力连线。
     skills.forEach(s=>(learning[s]||[]).forEach(k=>addEdge(skillIds.get(s),knowledgeIds.get(k),'skill-knowledge')));
     svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.setAttribute('height',H);
     edges.forEach(edge=>{
@@ -185,7 +184,7 @@
       if(edge.kind==='hierarchy')return chainIds.has(edge.source)&&chainIds.has(edge.target);
       if(edge.kind==='chain-map')return chainIds.has(edge.source);
       if(edge.kind==='major-role')return roleIds.has(edge.target);
-      if(edge.kind==='role-task'||edge.kind==='role-skill'||edge.kind==='role-quality')return roleIds.has(edge.source);
+      if(edge.kind==='role-task')return roleIds.has(edge.source);
       if(edge.kind==='skill-knowledge')return skillIds.has(edge.source);
       return edge.source===id||edge.target===id;
     }));
@@ -198,6 +197,14 @@
       edge.el.classList.toggle('focused',!!selected&&show);
       if(show){visible.add(edge.source);visible.add(edge.target)}
     });
+    if(selected){
+      const skills=unique(data.roles.flatMap(role=>role.skills));
+      const qualities=unique(data.roles.flatMap(role=>role.qualities));
+      data.roles.filter(role=>visible.has(role.id)).forEach(role=>{
+        role.skills.forEach(skill=>visible.add('s'+skills.indexOf(skill)));
+        role.qualities.forEach(quality=>visible.add('q'+qualities.indexOf(quality)));
+      });
+    }
     nodeEls.forEach((node,id)=>{
       node.classList.toggle('selected',selected===id);
       node.classList.toggle('muted',!!selected&&!visible.has(id)&&selected!==id);
@@ -213,7 +220,7 @@
     panels.forEach(p=>{
       p.heading.style.left=(p.x*scale-viewport.scrollLeft)+'px';
       p.heading.style.width=(p.w*scale)+'px';
-      p.heading.style.fontSize=Math.max(10,Math.min(16,14*scale))+'px';
+      p.heading.style.fontSize=Math.max(12,Math.min(19,17*scale))+'px';
     });
   }
   function centerView(){
