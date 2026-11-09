@@ -14,5 +14,11 @@
 .map-name #zoomOut:hover,.map-name #zoomIn:hover{background:#0e5bb7}
 .map-name #pathHint{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .map-name #resetView{margin-left:0}
-.pan-fixed-headers{position:fixed;height:44px;overflow:hidden;z-index:50;pointer-events:none;background:linear-gradient(180deg,#051d5df2,#051d5dd8)}
+.viewport-shell{position:relative}
+.pan-fixed-headers{position:absolute;top:1px;left:1px;height:44px;overflow:hidden;z-index:50;pointer-events:none;background:#051d5d}
+.embedded body{overflow:hidden}
+.embedded .app{height:100vh;min-height:0;padding:12px 16px 8px;display:flex;flex-direction:column}
+.embedded header,.embedded .map-name,.embedded footer{flex:none}
+.embedded .viewport-shell{flex:1;min-height:0}
+.embedded .graph-scroll{height:100%;min-height:0}
 .pan-fixed-heading{position:absolute;top:0;height:39px;box-sizing:border-box;display:flex;align-items:center;padding:0 11px;background:linear-gradient(90deg,#0b4bc8,#08277e);border:1px solid #2588e8;border-bottom:2px solid #32dcff;border-radius:3px 3px 0 0;color:#f2fbff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 3px 10px #00164a}

@@ -79,7 +79,7 @@
   const W=majorX+1276,pos=new Map(),nodeEls=new Map(),edges=[];
   let H=4200,scale=1,selected=null,dragging=false,dragStart=null,suppressClick=false;
   const elem=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
-  const fixedHeaders=elem('div','pan-fixed-headers');document.body.append(fixedHeaders);
+  const fixedHeaders=document.getElementById('fixedHeaders');
   function addNode(id,label,kind,x,y,w,h){
     const box=elem('div','pan-node '+kind,label);
     box.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
@@ -209,8 +209,7 @@
     updateHeaders();
   }
   function updateHeaders(){
-    const rect=viewport.getBoundingClientRect();
-    fixedHeaders.style.cssText=`left:${rect.left}px;top:${rect.top}px;width:${viewport.clientWidth}px`;
+    fixedHeaders.style.width=viewport.clientWidth+'px';
     panels.forEach(p=>{
       p.heading.style.left=(p.x*scale-viewport.scrollLeft)+'px';
       p.heading.style.width=(p.w*scale)+'px';
