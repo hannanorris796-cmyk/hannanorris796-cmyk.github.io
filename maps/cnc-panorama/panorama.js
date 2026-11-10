@@ -302,17 +302,6 @@
   document.getElementById('resetView').onclick=()=>{selected=null;scale=1;applyScale();centerView();updateFocus()};
   document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.28,scale*.9);applyScale();updateFrozenPositions()};
   document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.6,scale*1.1);applyScale();updateFrozenPositions()};
-  const fullscreenButton=document.getElementById('fullscreenView');
-  fullscreenButton.onclick=async()=>{
-    if(document.fullscreenElement)await document.exitFullscreen();
-    else await document.querySelector('.app').requestFullscreen();
-  };
-  document.addEventListener('fullscreenchange',()=>{
-    const active=!!document.fullscreenElement;
-    fullscreenButton.textContent=active?'退出全屏':'全屏';
-    fullscreenButton.setAttribute('aria-label',active?'退出全屏':'进入全屏');
-    requestAnimationFrame(()=>{applyScale();updateFrozenPositions()});
-  });
   document.getElementById('mapTitle').textContent=data.title;
   document.getElementById('sourceText').textContent=`数据来源：${data.source}；知识点由岗位技能推导`;
   build();requestAnimationFrame(centerView);
