@@ -1,0 +1,45 @@
+/* 美化预览：提高小节点的层次与对比度，保留原有图谱数据和交互。 */
+:root{--ink:#102747;--blue:#1766df;--blue-deep:#164b9b;--line:#d7e3f1;--surface:#f7faff}
+body,.app{background:#fff}
+.app{padding:14px 18px 10px}
+header{padding:0 4px 11px;border-bottom:1px solid #e3ebf5}
+.eyebrow{font-size:10px;letter-spacing:.17em;color:#4a83cd}
+.title-line{gap:18px;align-items:baseline}
+.title-line h1{font-size:29px;line-height:1.15;margin:4px 0 0;color:#112d57;letter-spacing:.01em}
+.title-line span{font-size:13px;font-weight:500;color:#70839b}
+.map-name{height:47px;gap:9px;padding:0 7px;border-bottom:0;color:var(--ink)}
+.map-name strong{font-size:15px;color:#14396f}
+.map-name #pathHint{color:#71849c;font-size:12px}
+.map-name #resetView,.map-name #fullscreenView{background:#fff;border:1px solid #c9dcf4;color:#1559b4;padding:6px 13px}
+.map-name #resetView:hover,.map-name #fullscreenView:hover{background:#eaf3ff;border-color:#6ca4ed}
+#viewport{height:calc(100vh - 157px);min-height:640px;border:1px solid #d6e3f2;border-radius:12px;background:#fff;box-shadow:0 7px 28px #1f55951a;scrollbar-color:#8eb3e1 #f1f5fb}
+.pan-panel{background:linear-gradient(180deg,#f5f9ff,#f8fbff);border:1px solid #d8e5f3;border-radius:9px}
+.pan-fixed-headers{background:#fff;border-bottom:1px solid #dce7f4}
+.pan-fixed-heading{background:#1853a7;border:1px solid #1853a7;border-bottom:3px solid #58a4ff;border-radius:7px 7px 0 0;color:#fff;font-weight:700;letter-spacing:.02em;box-shadow:0 3px 8px #1b559820}
+.pan-heading{background:#1853a7;border-color:#1853a7;color:#fff;clip-path:none;border-radius:7px}
+.pan-heading b{background:#0d448e;border-color:#61a9fa;color:#fff}
+.pan-node,.pan-node.chain,.pan-node.role,.pan-node.task,.pan-node.ability-skill,.pan-node.ability-quality,.pan-node.knowledge{border-radius:8px;color:var(--ink);box-shadow:0 2px 5px #244f8617;background:#fff}
+.pan-node{border:1px solid #bfd2e9;font-size:15px;font-weight:650;line-height:1.13;padding:4px 8px}
+.pan-node.chain{background:#eaf3ff;border:1px solid #accaf0;border-left:3px solid #2876d5;color:#164d91;font-size:15px}
+.pan-node.major{background:#1766df;border:1px solid #1766df;color:#fff;font-size:16px;font-weight:750;box-shadow:0 4px 11px #1766df33}
+.pan-node.role{background:#f7faff;border:1px solid #b8cfea;border-left:3px solid #4982c9;color:#183e70;font-size:15px}
+.pan-node.task{background:#fff;border:1px solid #c8d8ea;border-left:3px solid #397bd0;color:#243950;font-size:15px;font-weight:600;line-height:1.13;padding:4px 8px}
+.pan-node.ability-skill{background:#edf6ff;border:1px solid #b4d0ef;border-left:3px solid #1e78c9;color:#134a81;font-size:15px}
+.pan-node.ability-quality{background:#eef8f4;border:1px solid #b8ded0;border-left:3px solid #2a9a77;color:#17634e;font-size:15px}
+.pan-node.knowledge{background:#f6f4ff;border:1px solid #d1cafa;border-left:3px solid #7566cc;color:#403a7b;font-size:15px}
+.pan-node:hover{border-color:#2d80e6;box-shadow:0 4px 13px #1f67c632}
+.pan-node.muted,.pan-node.ability.muted{opacity:.78}
+.pan-node.selected,.pan-node.chain.selected,.pan-node.role.selected,.pan-node.task.selected,.pan-node.ability-skill.selected,.pan-node.ability-quality.selected,.pan-node.knowledge.selected{background:#dcecff;border-color:#1766df;color:#0b489a;box-shadow:0 0 0 2px #277ded55,0 5px 14px #206bd635}
+.pan-node.major.selected{background:#0b51bd;color:#fff}
+.pan-group-label{color:#175aa9;font-weight:800;font-size:14px;border-bottom:1px solid #a9c9ee}
+.pan-edge{stroke:#4a87c8;stroke-width:1.55;opacity:.34}
+.pan-edge.hierarchy{stroke:#2476d2;stroke-width:2;opacity:.82}
+.pan-edge.chain-map{opacity:.43}
+.pan-edge.task-skill,.pan-edge.task-quality,.pan-edge.inferred{opacity:.27}
+.pan-edge.skill-knowledge{stroke:#7181c6;opacity:.35}
+.pan-edge.focused,.pan-edge.task-skill.focused,.pan-edge.task-quality.focused,.pan-edge.skill-knowledge.focused,.pan-edge.inferred.focused{stroke:#0964e8;stroke-width:2.7;opacity:1;filter:none}
+footer{padding-top:6px;color:#8a9bb0}
+.app:fullscreen{padding:12px 16px;background:#fff}
+.app:fullscreen #viewport{height:auto;min-height:0}
+@media(max-width:900px){.title-line{gap:6px}.title-line span{font-size:12px}.title-line h1{font-size:25px}#viewport{height:calc(100vh - 175px)}}
+.embedded #viewport{height:100%;min-height:0;border:0;border-radius:0}

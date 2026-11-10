@@ -1,0 +1,53 @@
+/* 与承载页面的白底、蓝色主视觉保持一致。图谱位置和数据由原脚本控制。 */
+:root{color:#102451;background:#fff;color-scheme:light}
+html,body{background:#fff}
+body{background:#fff}
+.app{background:#fff}
+header{border-bottom:1px solid #e1eaf6;box-shadow:none}
+.eyebrow{color:#1766df}
+.title-line h1{color:#0a1b43;text-shadow:none}
+.title-line span{color:#526987}
+.map-name{color:#102451;border-bottom:1px solid #edf2fa}
+.map-name i{background:#1766df;box-shadow:none}
+.map-name #pathHint{color:#6d819d}
+.map-name #zoomValue{color:#1766df;font-weight:700}
+.map-name button,.map-name #resetView,.map-name #fullscreenView,.map-name #zoomOut,.map-name #zoomIn{background:#edf5ff;border:1px solid #bdd6f8;border-radius:7px;color:#125cc4;box-shadow:none;padding:6px 12px;font-weight:700;cursor:pointer}
+.map-name button:hover,.map-name #resetView:hover,.map-name #fullscreenView:hover,.map-name #zoomOut:hover,.map-name #zoomIn:hover{background:#dcecff;border-color:#7ab0f3;color:#084da9}
+.graph-scroll{border:1px solid #d8e5f5;background:#fff;box-shadow:none;scrollbar-color:#aac7ec #f0f5fc}
+.pan-panel{border:1px solid #e2ebf7;border-radius:8px;background:#f9fbff}
+.pan-heading{border-color:#d2e4fb;background:#eaf3ff;color:#143866;clip-path:none;border-radius:6px}
+.pan-heading b{background:#1766df;border-color:#d0e5ff;color:#fff}
+.pan-fixed-headers{background:#fff;border-bottom:1px solid #e1eaf6}
+.pan-fixed-heading{background:#eaf3ff;border:1px solid #d1e3fa;border-bottom:2px solid #1766df;border-radius:6px 6px 0 0;color:#174573;box-shadow:none}
+.pan-node{border:1px solid #bfd5ef;border-radius:7px;background:#fff;color:#193457;box-shadow:0 2px 6px #1a5baf0d}
+.pan-node:hover{border-color:#3a85e9;box-shadow:0 2px 10px #1a64ca22}
+.pan-node.selected,.pan-node.selected:hover{border-color:#0964e8;background:#eaf3ff;color:#0a4dab;box-shadow:0 0 0 2px #5aa0fa55,0 4px 12px #1d67c82b}
+.pan-node.muted{opacity:.32}
+.pan-node.chain{background:#f0f7ff;border-color:#aecdf3;color:#124c95}
+.pan-node.major{background:#1766df;border-color:#1766df;color:#fff;box-shadow:0 3px 10px #1766df29}
+.pan-node.major.selected{background:#0d52bc;color:#fff}
+.pan-node.role{background:#edf5ff;border-color:#9ec5f4;color:#124d9e}
+.pan-node.task{background:#fff;border-color:#cddded;color:#243a58}
+.pan-node.ability-skill{background:#eef5ff;border-color:#b6d3f6;color:#164e98}
+.pan-node.ability-quality{background:#edf9f7;border-color:#b5ddd8;color:#126b68}
+.pan-node.knowledge{background:#f4f6ff;border-color:#cbd5f4;color:#374c86}
+.pan-node.empty{background:#f8fbff;border-color:#d8e5f3;color:#8398b3}
+.pan-node.chain.selected,.pan-node.role.selected,.pan-node.task.selected,.pan-node.ability-skill.selected,.pan-node.ability-quality.selected,.pan-node.knowledge.selected{border-color:#0964e8;background:#e3f0ff;color:#0a4dab;box-shadow:0 0 0 2px #5aa0fa55,0 4px 12px #1d67c82b}
+.pan-node.ability h3{color:#183457;border-color:#d4e4f5}
+.ability-section strong,.pan-group-label{color:#1263cb}
+.ability-tags span{color:#304765}
+.pan-group-label{border-color:#c0d8f4}
+.pan-mark{color:#1d7be5}
+.pan-edge{stroke:#5e97d7;stroke-width:1.35;opacity:.26;filter:none}
+.pan-edge.hierarchy{stroke:#2775d5;stroke-width:1.8;opacity:.7}
+.pan-edge.chain-map{opacity:.35}
+.pan-edge.task-skill,.pan-edge.task-quality,.pan-edge.inferred{opacity:.22}
+.pan-edge.skill-knowledge{stroke:#7f8fd2;opacity:.3}
+.pan-edge.focused,.pan-edge.task-skill.focused,.pan-edge.task-quality.focused,.pan-edge.skill-knowledge.focused,.pan-edge.inferred.focused{stroke:#0964e8;stroke-width:2.3;opacity:.95;filter:none}
+footer{color:#7185a0}
+.app:fullscreen{background:#fff}
+.embedded .app{height:100vh;min-height:0;padding:0;display:flex;flex-direction:column}
+.embedded header,.embedded footer{display:none}
+.embedded .map-name{height:51px;min-height:51px;padding:0 13px}
+.embedded .viewport-shell{flex:1;min-height:0}
+.embedded .graph-scroll{height:100%;min-height:0;border:0;border-radius:0}

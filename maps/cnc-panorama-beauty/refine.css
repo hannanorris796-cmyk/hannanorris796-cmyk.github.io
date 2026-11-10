@@ -1,0 +1,31 @@
+/* Visual refinement based on the supplied reference: shared flat node language. */
+:root{color:#eef8ff}
+body{background:linear-gradient(180deg,#03144eb8,#021347e5),url('background.png') center/cover fixed}
+.graph-scroll{border-color:#145cc1;background:linear-gradient(180deg,#06195c80,#021545b0);box-shadow:inset 0 0 22px #0b66d51b}
+.columns{gap:10px}
+.column{border:1px solid #1554b5;border-radius:7px;background:linear-gradient(180deg,#08297538,#041b5935)}
+.column h2{position:relative;align-self:flex-start;min-width:93%;min-height:39px;margin:0;border:1px solid #1673e7;border-top:0;border-left:0;border-radius:0;background:linear-gradient(90deg,#0939b8 0%,#06228b 68%,#051a67 100%);clip-path:polygon(0 0,94% 0,100% 50%,94% 100%,0 100%);padding:8px 20px 7px 51px;font-size:15px;font-weight:800;letter-spacing:.04em;text-shadow:0 0 7px #47a8ff}
+.column h2 b{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;width:42px;height:39px;margin:0;background:#0952e1;border-right:2px solid #24ccff;color:#2bf1ff;font-size:25px;line-height:1}
+.column-body{padding:17px 12px}
+.node{border:1px solid #137cf2;border-radius:4px;background:linear-gradient(180deg,#0b39a7,#08277c);box-shadow:inset 0 0 5px #197fff35;color:#f2f8ff;font-weight:600}
+.chain-node,.column-0 .chain-node,.column-0 .chain-primary .chain-node,.column-0 .chain-item .chain-node{min-height:64px;border-radius:4px}
+.chain-primary small,.chain-item small{color:#78dffc}
+.task-list{gap:7px}
+.task-node{min-height:47px;padding:7px 12px;border-radius:4px;font-size:12px;line-height:1.3}
+.symbol{color:#54ecff;text-shadow:0 0 7px #42e4ff}
+.ability-card,.details-card{border:0;border-radius:0;background:transparent;box-shadow:none;padding:0}
+.ability-card h3{margin:0 0 13px;padding:11px 8px;border:1px solid #137cf2;border-radius:4px;background:linear-gradient(180deg,#0b39a7,#08277c);font-size:15px;font-weight:700}
+.ability-summary{display:flex;flex-direction:row;align-items:center;justify-content:space-between;margin:0 0 13px;padding:9px 10px;border:1px solid #145bc1;border-radius:3px;background:#082870a8;gap:6px}
+.ability-summary strong{font-size:12px;color:#54e9ff}.ability-summary span{font-size:11px}
+.detail-section{margin-top:12px;padding-top:11px;border-color:#2058a0}
+.detail-section h4{font-size:13px;margin-bottom:9px;color:#77e6ff}
+.source-note{color:#8cb8d0}
+.chip-list{gap:6px}
+.chip{border:1px solid #175fc4;border-radius:3px;background:linear-gradient(180deg,#0a328b,#08286f);box-shadow:none;padding:6px 8px;font-size:11px;min-height:29px}
+.column-4 .chip{border-color:#176abd}
+.column-5 .detail-section:last-child .chip{border-color:#475fc6;background:linear-gradient(180deg,#182f8a,#16246d)}
+.edge{stroke:#05d8f7;stroke-width:1.35;opacity:.76}
+.edge.branch{stroke-width:1;opacity:.45}
+.column h2{font-size:16px}.task-node{font-size:13px}.chip{font-size:12px}.column-0 .chain-node,.column-0 .chain-primary .chain-node,.column-0 .chain-item .chain-node{font-size:14px}
+.column-5 .chip-list{grid-template-columns:1fr}.column-5 .chip{min-height:28px}
+.column-0 .chain-stack.single{display:block}.column-0 .chain-stack.single .chain-primary{width:75%;margin:auto}.column-0 .chain-stack.single .chain-node{min-height:66px;font-size:16px}
