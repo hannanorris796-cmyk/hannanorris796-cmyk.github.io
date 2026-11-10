@@ -87,7 +87,7 @@
   let H=4200,scale=1,layoutExtra=0,selected=null,dragging=false,dragStart=null,suppressClick=false;
   const groupLabels=[];
   const elem=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
-  const fixedHeaders=elem('div','pan-fixed-headers');document.querySelector('.app').append(fixedHeaders);
+  const fixedHeaders=document.getElementById('fixedHeaders');
   function addNode(id,label,kind,x,y,w,h){
     const box=elem('div','pan-node '+kind,label);
     box.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
@@ -266,8 +266,7 @@
     if(redraw)drawEdges(true);
   }
   function updateHeaders(){
-    const rect=viewport.getBoundingClientRect();
-    fixedHeaders.style.cssText=`left:${rect.left}px;top:${rect.top}px;width:${viewport.clientWidth}px`;
+    fixedHeaders.style.width=viewport.clientWidth+'px';
     panels.forEach((p,i)=>{
       p.heading.style.left=((p.x+columnShift(i))*scale-viewport.scrollLeft)+'px';
       p.heading.style.width=(p.w*scale)+'px';
@@ -301,6 +300,8 @@
   viewport.addEventListener('pointerup',()=>{dragging=false;viewport.classList.remove('dragging');setTimeout(()=>suppressClick=false,0)});
   viewport.addEventListener('click',e=>{if(suppressClick)return;if(!e.target.closest('.pan-node')){selected=null;updateFocus()}});
   document.getElementById('resetView').onclick=()=>{selected=null;scale=1;applyScale();centerView();updateFocus()};
+  document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.28,scale*.9);applyScale();updateFrozenPositions()};
+  document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.6,scale*1.1);applyScale();updateFrozenPositions()};
   const fullscreenButton=document.getElementById('fullscreenView');
   fullscreenButton.onclick=async()=>{
     if(document.fullscreenElement)await document.exitFullscreen();
