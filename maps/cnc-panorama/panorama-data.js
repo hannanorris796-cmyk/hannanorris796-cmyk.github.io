@@ -1,4 +1,4 @@
-// 三份表合并；只保留有名称的产业链节点，最多四级。
+// 逐条复核任务—能力关系后更新。
 window.PANORAMA_DATA={
   "title": "数控技术产业全景图",
   "source": "最早表＋产业链编码补充表＋v2表＋完整节点路径表／数控技术",
@@ -154,15 +154,12 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [
-            "质量检验",
-            "计算机系统运维"
+            "质量检验"
           ],
           "qualities": [
             "注重细节"
           ],
-          "inferred_skills": [
-            "计算机系统运维"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r0t2",
@@ -224,13 +221,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "静电防护(ESD)"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "静电防护(ESD)"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r0t6",
@@ -314,21 +307,13 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "卡尺",
-        "千分尺",
-        "图纸解读",
-        "计算机系统运维",
-        "机械制图",
         "质量检验",
         "量具与检具使用",
-        "静电防护(ESD)",
         "测绘仪器操作"
       ],
       "qualities": [
-        "身体健康",
         "注重细节",
-        "职场沟通",
-        "协调"
+        "职场沟通"
       ]
     },
     {
@@ -353,9 +338,7 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [],
-          "qualities": [
-            "身体健康"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -447,9 +430,7 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [],
-          "qualities": [
-            "主动性"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -498,12 +479,7 @@ window.PANORAMA_DATA={
       "skills": [
         "机电一体化技术"
       ],
-      "qualities": [
-        "身体健康",
-        "协调",
-        "职场沟通",
-        "主动性"
-      ]
+      "qualities": []
     },
     {
       "id": "r2",
@@ -521,13 +497,10 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [
-            "计算机数控（CNC）",
-            "发那科(FANUC)系统"
+            "数控技术"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "发那科(FANUC)系统"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r2t1",
@@ -548,14 +521,11 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [
-            "计算机数控（CNC）",
-            "图纸解读",
-            "检具使用"
+            "数控技术",
+            "图纸识读"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "检具使用"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r2t3",
@@ -565,9 +535,7 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [],
-          "qualities": [
-            "创新"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -578,9 +546,7 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [],
-          "qualities": [
-            "勤学好问"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -591,13 +557,10 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [
-            "计算机数控（CNC）",
-            "内径百分表"
+            "数控技术"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "内径百分表"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r2t6",
@@ -607,7 +570,7 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [
-            "计算机数控（CNC）"
+            "数控技术"
           ],
           "qualities": [],
           "inferred_skills": []
@@ -631,13 +594,12 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [
-            "计算机数控（CNC）",
-            "编程",
-            "软件编码"
+            "数控技术",
+            "编程"
           ],
           "qualities": [],
           "inferred_skills": [
-            "软件编码"
+            "编程"
           ]
         },
         {
@@ -648,7 +610,7 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [
-            "计算机数控（CNC）",
+            "数控技术",
             "机床设备维修保养"
           ],
           "qualities": [],
@@ -657,23 +619,11 @@ window.PANORAMA_DATA={
       ],
       "skills": [
         "机床设备维修保养",
-        "软件编码",
-        "检具使用",
-        "图纸解读",
-        "发那科(FANUC)系统",
-        "计算机数控（CNC）",
-        "机械制图",
         "编程",
-        "CNC编程",
-        "内径百分表"
+        "图纸识读",
+        "数控技术"
       ],
-      "qualities": [
-        "协调",
-        "勤学好问",
-        "创新",
-        "解决问题",
-        "身体健康"
-      ]
+      "qualities": []
     },
     {
       "id": "r3",
@@ -829,11 +779,8 @@ window.PANORAMA_DATA={
         "生产设备操作与维护"
       ],
       "qualities": [
-        "勤学好问",
         "解决问题",
-        "身体健康",
-        "协调",
-        "适应力"
+        "协调"
       ]
     },
     {
@@ -863,9 +810,7 @@ window.PANORAMA_DATA={
             "126"
           ],
           "skills": [],
-          "qualities": [
-            "积极态度"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -952,11 +897,8 @@ window.PANORAMA_DATA={
       ],
       "skills": [],
       "qualities": [
-        "身体健康",
         "协调",
-        "勤学好问",
-        "职场沟通",
-        "积极态度"
+        "职场沟通"
       ]
     },
     {
@@ -998,13 +940,10 @@ window.PANORAMA_DATA={
           ],
           "skills": [
             "装配图绘制",
-            "机械装配",
-            "计算机辅助设计(CAD)"
+            "机械装配"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "计算机辅助设计(CAD)"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r5t2",
@@ -1015,7 +954,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [],
+          "skills": [
+            "机械装配"
+          ],
           "qualities": [],
           "inferred_skills": []
         },
@@ -1043,13 +984,8 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "机械装配"
-          ],
-          "qualities": [
-            "职场沟通",
-            "注重细节"
-          ],
+          "skills": [],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -1061,15 +997,11 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "手动工具使用"
-          ],
+          "skills": [],
           "qualities": [
             "注重细节"
           ],
-          "inferred_skills": [
-            "手动工具使用"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r5t6",
@@ -1109,9 +1041,7 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [],
-          "qualities": [
-            "注重细节"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -1129,18 +1059,11 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "机械制图",
         "机械装配",
         "装配图绘制",
-        "图纸解读",
-        "计算机辅助设计(CAD)",
         "手动工具使用"
       ],
       "qualities": [
-        "协调",
-        "身体健康",
-        "主动性",
-        "职场沟通",
         "注重细节"
       ]
     },
@@ -1173,17 +1096,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "二次回路图",
-            "传动理论",
-            "测试仪器与测量工具使用"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "二次回路图",
-            "传动理论",
-            "测试仪器与测量工具使用"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r6t2",
@@ -1196,7 +1111,7 @@ window.PANORAMA_DATA={
           "skills": [],
           "qualities": [
             "职场沟通",
-            "合作"
+            "团队合作"
           ],
           "inferred_skills": []
         },
@@ -1232,15 +1147,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "传动理论",
-            "测试仪器与测量工具使用"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "传动理论",
-            "测试仪器与测量工具使用"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r6t6",
@@ -1250,17 +1159,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "二次回路图",
-            "气动系统图识读",
-            "电气理论"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "二次回路图",
-            "气动系统图识读",
-            "电气理论"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r6t7",
@@ -1270,13 +1171,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "电气理论"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "电气理论"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r6t8",
@@ -1286,13 +1183,9 @@ window.PANORAMA_DATA={
             "1260102",
             "126010201"
           ],
-          "skills": [
-            "金属加工"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "金属加工"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r6t9",
@@ -1307,21 +1200,10 @@ window.PANORAMA_DATA={
           "inferred_skills": []
         }
       ],
-      "skills": [
-        "二次回路图",
-        "传动理论",
-        "图纸解读",
-        "气动系统图识读",
-        "测试仪器与测量工具使用",
-        "电气理论",
-        "金属加工"
-      ],
+      "skills": [],
       "qualities": [
-        "协调",
         "职场沟通",
-        "合作",
-        "抗压性强",
-        "勤学好问"
+        "团队合作"
       ]
     },
     {
@@ -1343,10 +1225,7 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [],
-      "qualities": [
-        "身体健康",
-        "以团队为导向"
-      ]
+      "qualities": []
     },
     {
       "id": "r8",
@@ -1362,7 +1241,7 @@ window.PANORAMA_DATA={
             "147010203"
           ],
           "skills": [
-            "计算机数控（CNC）",
+            "数控技术",
             "CNC机床操作规程"
           ],
           "qualities": [],
@@ -1421,16 +1300,10 @@ window.PANORAMA_DATA={
             "147010203"
           ],
           "skills": [
-            "机械制图",
-            "图纸解读",
-            "CAD图纸识读",
-            "金属成型工艺"
+            "机械制图"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "CAD图纸识读",
-            "金属成型工艺"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r8t6",
@@ -1438,17 +1311,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "147010203"
           ],
-          "skills": [
-            "冲床",
-            "激光切割",
-            "金属成型工艺"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "冲床",
-            "激光切割",
-            "金属成型工艺"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r8t7",
@@ -1467,7 +1332,7 @@ window.PANORAMA_DATA={
             "147010203"
           ],
           "skills": [
-            "图纸解读",
+            "图纸识读",
             "CAD图纸识读",
             "检具使用"
           ],
@@ -1491,22 +1356,13 @@ window.PANORAMA_DATA={
       "skills": [
         "机床设备维修保养",
         "检具使用",
-        "图纸解读",
+        "图纸识读",
         "机械制图",
-        "计算机数控（CNC）",
-        "冲床",
-        "激光切割",
-        "金属成型工艺",
+        "数控技术",
         "CAD图纸识读",
         "CNC机床操作规程"
       ],
-      "qualities": [
-        "职场沟通",
-        "协调",
-        "身体健康",
-        "抗压性强",
-        "勤学好问"
-      ]
+      "qualities": []
     },
     {
       "id": "r9",
@@ -1535,19 +1391,12 @@ window.PANORAMA_DATA={
             "102020101020204"
           ],
           "skills": [],
-          "qualities": [
-            "法律意识"
-          ],
+          "qualities": [],
           "inferred_skills": []
         }
       ],
       "skills": [],
-      "qualities": [
-        "以团队为导向",
-        "勤学好问",
-        "法律意识",
-        "身体健康"
-      ]
+      "qualities": []
     },
     {
       "id": "r10",
@@ -1559,13 +1408,11 @@ window.PANORAMA_DATA={
           "label": "操作计算机数控机床。",
           "contexts": [],
           "skills": [
-            "计算机数控（CNC）",
-            "新代刀塔机",
-            "发那科(FANUC)系统"
+            "数控技术",
+            "新代刀塔机"
           ],
           "qualities": [],
           "inferred_skills": [
-            "发那科(FANUC)系统",
             "新代刀塔机"
           ]
         },
@@ -1574,14 +1421,11 @@ window.PANORAMA_DATA={
           "label": "操作CNC加工机台，跟进产品尺寸监控，调试机台及夹持工装",
           "contexts": [],
           "skills": [
-            "计算机数控（CNC）",
-            "卡尺",
-            "北京精雕软件"
+            "数控技术",
+            "卡尺"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "北京精雕软件"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r10t2",
@@ -1596,9 +1440,7 @@ window.PANORAMA_DATA={
           "label": "安装调整装配台、架，吊运装卸工件。",
           "contexts": [],
           "skills": [],
-          "qualities": [
-            "适应力"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -1606,9 +1448,7 @@ window.PANORAMA_DATA={
           "label": "维护保养设备，调整设备运行中的参数，处理故障",
           "contexts": [],
           "skills": [],
-          "qualities": [
-            "适应力"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -1616,14 +1456,10 @@ window.PANORAMA_DATA={
           "label": "解读工程草图、技术规范或图纸。",
           "contexts": [],
           "skills": [
-            "图纸识读",
-            "图纸解读",
-            "计算机辅助设计(CAD)"
+            "图纸识读"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "计算机辅助设计(CAD)"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r10t6",
@@ -1640,9 +1476,7 @@ window.PANORAMA_DATA={
           "skills": [
             "卡尺"
           ],
-          "qualities": [
-            "适应力"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -1651,14 +1485,10 @@ window.PANORAMA_DATA={
           "contexts": [],
           "skills": [
             "图纸识读",
-            "图纸解读",
-            "刀具调整(调刀)",
-            "北京精雕软件"
+            "刀具调整(调刀)"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "北京精雕软件"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r10t9",
@@ -1670,24 +1500,13 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "计算机数控（CNC）",
+        "数控技术",
         "刀具调整(调刀)",
-        "北京精雕软件",
         "新代刀塔机",
-        "发那科(FANUC)系统",
-        "机械制图",
-        "图纸解读",
         "图纸识读",
-        "卡尺",
-        "计算机辅助设计(CAD)"
+        "卡尺"
       ],
-      "qualities": [
-        "身体健康",
-        "协调",
-        "勤学好问",
-        "职场沟通",
-        "适应力"
-      ]
+      "qualities": []
     },
     {
       "id": "r11",
@@ -1699,7 +1518,6 @@ window.PANORAMA_DATA={
           "label": "操作计算机数控机床。",
           "contexts": [],
           "skills": [
-            "计算机数控（CNC）",
             "数控技术"
           ],
           "qualities": [],
@@ -1709,10 +1527,7 @@ window.PANORAMA_DATA={
           "id": "r11t1",
           "label": "使用手工工具维护机床，并拆除或更换损坏或磨损的机床设备",
           "contexts": [],
-          "skills": [
-            "计算机数控（CNC）",
-            "数控技术"
-          ],
+          "skills": [],
           "qualities": [],
           "inferred_skills": []
         },
@@ -1721,14 +1536,11 @@ window.PANORAMA_DATA={
           "label": "操作高速数控雕铣机，严格按照操作规程和机床使用说明书使用机床",
           "contexts": [],
           "skills": [
-            "计算机数控（CNC）",
             "数控技术",
-            "机械加工技术",
-            "新代刀塔机"
+            "机械加工技术"
           ],
           "qualities": [],
           "inferred_skills": [
-            "新代刀塔机",
             "机械加工技术"
           ]
         },
@@ -1782,14 +1594,14 @@ window.PANORAMA_DATA={
           "label": "检查下机产品质量, 处理外观质量缺陷",
           "contexts": [],
           "skills": [
-            "基础测量工具使用"
+            "量具使用"
           ],
           "qualities": [
             "视力敏锐度",
             "注重细节"
           ],
           "inferred_skills": [
-            "基础测量工具使用"
+            "量具使用"
           ]
         },
         {
@@ -1797,31 +1609,23 @@ window.PANORAMA_DATA={
           "label": "进行产品的加工指导和质量检测",
           "contexts": [],
           "skills": [
-            "基础测量工具使用"
+            "量具使用"
           ],
           "qualities": [
             "注重细节"
           ],
           "inferred_skills": [
-            "基础测量工具使用"
+            "量具使用"
           ]
         }
       ],
       "skills": [
-        "机械制图",
-        "新代刀塔机",
         "数控技术",
         "机械加工技术",
-        "CNC编程",
-        "卡尺",
-        "图纸解读",
-        "千分尺",
-        "计算机数控（CNC）",
-        "基础测量工具使用"
+        "量具使用"
       ],
       "qualities": [
         "注重细节",
-        "身体健康",
         "协调",
         "职场沟通",
         "视力敏锐度"
@@ -1837,13 +1641,10 @@ window.PANORAMA_DATA={
           "label": "操作计算机数控机床。",
           "contexts": [],
           "skills": [
-            "计算机数控（CNC）",
-            "G代码(G-Codes)"
+            "数控技术"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "G代码(G-Codes)"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r12t1",
@@ -1874,14 +1675,12 @@ window.PANORAMA_DATA={
           "label": "操作CNC加工机台，跟进产品尺寸监控，调试机台及夹持工装",
           "contexts": [],
           "skills": [
-            "计算机数控（CNC）",
+            "数控技术",
             "卡尺",
-            "量具使用",
-            "内径百分表"
+            "量具使用"
           ],
           "qualities": [],
           "inferred_skills": [
-            "内径百分表",
             "量具使用"
           ]
         },
@@ -1894,9 +1693,7 @@ window.PANORAMA_DATA={
             "CNC编程",
             "G代码(G-Codes)"
           ],
-          "qualities": [
-            "学习的意愿"
-          ],
+          "qualities": [],
           "inferred_skills": [
             "G代码(G-Codes)"
           ]
@@ -1924,7 +1721,7 @@ window.PANORAMA_DATA={
           "label": "按图纸加工高精度零件",
           "contexts": [],
           "skills": [
-            "图纸解读",
+            "图纸识读",
             "卡尺",
             "千分尺",
             "量具使用"
@@ -1936,23 +1733,17 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "机械制图",
-        "图纸解读",
+        "图纸识读",
         "刀具调整(调刀)",
-        "计算机数控（CNC）",
+        "数控技术",
         "CNC编程",
         "G代码(G-Codes)",
         "量具使用",
         "卡尺",
-        "千分尺",
-        "内径百分表"
+        "千分尺"
       ],
       "qualities": [
-        "协调",
-        "身体健康",
-        "职场沟通",
-        "勤学好问",
-        "学习的意愿"
+        "协调"
       ]
     },
     {
@@ -1964,7 +1755,9 @@ window.PANORAMA_DATA={
           "id": "r13t0",
           "label": "操作计算机数控机床。",
           "contexts": [],
-          "skills": [],
+          "skills": [
+            "数控车床"
+          ],
           "qualities": [],
           "inferred_skills": []
         },
@@ -1999,7 +1792,7 @@ window.PANORAMA_DATA={
           "label": "按图纸加工高精度零件",
           "contexts": [],
           "skills": [
-            "图纸解读"
+            "图纸识读"
           ],
           "qualities": [
             "注重细节"
@@ -2028,16 +1821,10 @@ window.PANORAMA_DATA={
           "contexts": [],
           "skills": [
             "数控车床",
-            "编程",
-            "普通车床操作",
-            "钻床",
-            "镗刀"
+            "编程"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "钻床",
-            "镗刀"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r13t8",
@@ -2054,34 +1841,20 @@ window.PANORAMA_DATA={
           "label": "操作机床车床，对机械零件进行磨削、锉削及车削加工，使其尺寸符合规定要求。",
           "contexts": [],
           "skills": [
-            "普通车床操作",
-            "数控车床",
-            "镗刀"
+            "数控车床"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "镗刀"
-          ]
+          "inferred_skills": []
         }
       ],
       "skills": [
-        "普通车床操作",
         "数控车床",
-        "机械制图",
-        "图纸解读",
-        "刀具调整(调刀)",
-        "CNC编程",
-        "钻床",
+        "图纸识读",
         "编程",
-        "铣削",
-        "镗刀"
+        "铣削"
       ],
       "qualities": [
-        "协调",
-        "职场沟通",
-        "身体健康",
-        "注重细节",
-        "勤学好问"
+        "注重细节"
       ]
     },
     {
@@ -2094,13 +1867,10 @@ window.PANORAMA_DATA={
           "label": "操作计算机数控机床。",
           "contexts": [],
           "skills": [
-            "数控技术",
-            "发那科(FANUC)系统"
+            "数控技术"
           ],
           "qualities": [],
-          "inferred_skills": [
-            "发那科(FANUC)系统"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r14t1",
@@ -2166,13 +1936,9 @@ window.PANORAMA_DATA={
           "id": "r14t8",
           "label": "进行产品的加工指导和质量检测",
           "contexts": [],
-          "skills": [
-            "测绘仪器操作"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "测绘仪器操作"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r14t9",
@@ -2184,19 +1950,10 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "测绘仪器操作",
         "机械加工技术",
-        "发那科(FANUC)系统",
-        "图纸解读",
-        "数控技术",
-        "铣削"
+        "数控技术"
       ],
-      "qualities": [
-        "身体健康",
-        "以团队为导向",
-        "勤学好问",
-        "职场沟通"
-      ]
+      "qualities": []
     },
     {
       "id": "r15",
@@ -2223,13 +1980,9 @@ window.PANORAMA_DATA={
           "id": "r15t2",
           "label": "负责自动化设备参数设定、维护、保养",
           "contexts": [],
-          "skills": [
-            "变频器选型"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "变频器选型"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r15t3",
@@ -2243,13 +1996,9 @@ window.PANORAMA_DATA={
           "id": "r15t4",
           "label": "及时进行设备故障诊断和排除，以恢复设备正常运行",
           "contexts": [],
-          "skills": [
-            "变频器选型"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "变频器选型"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r15t5",
@@ -2292,16 +2041,8 @@ window.PANORAMA_DATA={
           "inferred_skills": []
         }
       ],
-      "skills": [
-        "变频器选型"
-      ],
-      "qualities": [
-        "协调",
-        "勤学好问",
-        "职场沟通",
-        "身体健康",
-        "注重细节"
-      ]
+      "skills": [],
+      "qualities": []
     },
     {
       "id": "r16",
@@ -2316,13 +2057,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "SolidWorks（CAD）"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "SolidWorks（CAD）"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r16t1",
@@ -2331,9 +2068,7 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [],
-          "qualities": [
-            "以团队为导向"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -2375,13 +2110,11 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [
-            "流程集成",
-            "自动化设备导入"
+            "流程集成"
           ],
           "qualities": [],
           "inferred_skills": [
-            "流程集成",
-            "自动化设备导入"
+            "流程集成"
           ]
         },
         {
@@ -2414,15 +2147,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "自动化设备导入",
-            "UG (Unigraphics NX)"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "UG (Unigraphics NX)",
-            "自动化设备导入"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r16t9",
@@ -2436,18 +2163,10 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "计算机辅助设计(CAD)",
-        "UG (Unigraphics NX)",
-        "SolidWorks（CAD）",
-        "流程集成",
-        "自动化设备导入"
+        "流程集成"
       ],
       "qualities": [
-        "勤学好问",
-        "职场沟通",
-        "协调",
-        "以团队为导向",
-        "学习的意愿"
+        "协调"
       ]
     },
     {
@@ -2475,13 +2194,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "可编程逻辑控制器(PLC)编程"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "可编程逻辑控制器(PLC)编程"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r17t2",
@@ -2509,15 +2224,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "云计算",
-            "可编程逻辑控制器(PLC)编程"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "云计算",
-            "可编程逻辑控制器(PLC)编程"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r17t5",
@@ -2535,13 +2244,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "数据分析"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "数据分析"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r17t7",
@@ -2559,13 +2264,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "数据分析"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "数据分析"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r17t9",
@@ -2578,16 +2279,8 @@ window.PANORAMA_DATA={
           "inferred_skills": []
         }
       ],
-      "skills": [
-        "可编程逻辑控制器(PLC)编程",
-        "云计算",
-        "数据分析"
-      ],
+      "skills": [],
       "qualities": [
-        "协调",
-        "职场沟通",
-        "身体健康",
-        "勤学好问",
         "注重细节"
       ]
     },
@@ -2678,9 +2371,7 @@ window.PANORAMA_DATA={
             "126010201"
           ],
           "skills": [],
-          "qualities": [
-            "适应力"
-          ],
+          "qualities": [],
           "inferred_skills": []
         },
         {
@@ -2689,15 +2380,9 @@ window.PANORAMA_DATA={
           "contexts": [
             "126010201"
           ],
-          "skills": [
-            "UG (Unigraphics NX)",
-            "五轴编程"
-          ],
+          "skills": [],
           "qualities": [],
-          "inferred_skills": [
-            "UG (Unigraphics NX)",
-            "五轴编程"
-          ]
+          "inferred_skills": []
         },
         {
           "id": "r18t9",
@@ -2712,20 +2397,9 @@ window.PANORAMA_DATA={
       ],
       "skills": [
         "质量管理",
-        "千分尺",
-        "卡尺",
-        "五轴编程",
-        "生产流程管理",
-        "图纸解读",
-        "UG (Unigraphics NX)"
+        "生产流程管理"
       ],
-      "qualities": [
-        "抗压性强",
-        "职场沟通",
-        "适应力",
-        "勤学好问",
-        "主动性"
-      ]
+      "qualities": []
     },
     {
       "id": "r19",
@@ -2764,8 +2438,7 @@ window.PANORAMA_DATA={
             "机械设备操作与维护"
           ],
           "qualities": [
-            "解决问题",
-            "抗压性强"
+            "解决问题"
           ],
           "inferred_skills": []
         },
@@ -2851,16 +2524,134 @@ window.PANORAMA_DATA={
         }
       ],
       "skills": [
-        "机械设备操作与维护",
-        "计算机辅助设计(CAD)"
+        "机械设备操作与维护"
       ],
       "qualities": [
-        "协调",
-        "身体健康",
         "诚实",
-        "抗压性强",
         "解决问题"
       ]
     }
-  ]
+  ],
+  "learning": {
+    "CAD图纸识读": [
+      "图层、线型与剖视表达",
+      "尺寸、公差及技术要求读取"
+    ],
+    "CNC机床操作规程": [
+      "开机回零与工件坐标设定",
+      "对刀、试切及停机安全顺序"
+    ],
+    "CNC编程": [
+      "G/M代码与程序结构",
+      "刀具补偿和加工轨迹验证"
+    ],
+    "G代码(G-Codes)": [
+      "常用G指令及模态规则",
+      "坐标、进给与插补指令编排"
+    ],
+    "刀具调整(调刀)": [
+      "刀具几何与磨损判定",
+      "对刀值、刀补及换刀验证"
+    ],
+    "千分尺": [
+      "测微螺杆结构与零位检查",
+      "测力控制和尺寸读数"
+    ],
+    "卡尺": [
+      "游标或数显卡尺结构与校零",
+      "外径、内径、深度测量及误差控制"
+    ],
+    "图纸识读": [
+      "投影视图、剖视与零件表达",
+      "尺寸、公差和表面技术要求"
+    ],
+    "手动工具使用": [
+      "工具规格与用途选择",
+      "扭矩控制及手工具安全检查"
+    ],
+    "数控技术": [
+      "数控机床坐标系与插补",
+      "程序、刀补和加工精度控制"
+    ],
+    "数控车床": [
+      "车床主轴、刀塔与坐标轴",
+      "车削装夹、对刀和试切"
+    ],
+    "新代刀塔机": [
+      "新代控制界面与刀塔换刀",
+      "刀具偏置、报警和试运行"
+    ],
+    "机床设备维修保养": [
+      "机床润滑、导轨与主轴点检",
+      "常见报警和故障排查"
+    ],
+    "机械制图": [
+      "正投影与剖视图",
+      "尺寸、公差和表面粗糙度标注"
+    ],
+    "机械加工技术": [
+      "车、铣、钻、磨加工选择",
+      "切削用量和表面质量控制"
+    ],
+    "机械装配": [
+      "装配基准与顺序",
+      "配合间隙、紧固和装配检验"
+    ],
+    "机械设备操作与维护": [
+      "设备启停与运行状态监测",
+      "润滑、点检和维护记录"
+    ],
+    "机电一体化技术": [
+      "机械传动与执行机构",
+      "传感、控制和电气系统集成"
+    ],
+    "检具使用": [
+      "专用检具定位与零位校准",
+      "通止判定和检具维护"
+    ],
+    "流程集成": [
+      "跨工序数据和责任接口",
+      "流程变更与异常闭环"
+    ],
+    "测绘仪器操作": [
+      "量测设备校准与坐标基准",
+      "测量点采集和结果记录"
+    ],
+    "生产流程管理": [
+      "生产计划与工序衔接",
+      "瓶颈识别和过程质量监控"
+    ],
+    "生产设备操作与维护": [
+      "设备点检与安全启停",
+      "运行参数监控和预防性保养"
+    ],
+    "编程": [
+      "程序变量、条件与循环",
+      "代码调试和异常处理"
+    ],
+    "装配图绘制": [
+      "零部件序号与明细栏",
+      "配合关系和装配技术要求"
+    ],
+    "质量检验": [
+      "抽样方案与量测方法",
+      "检验记录和不合格品判定"
+    ],
+    "质量管理": [
+      "质量目标与过程监控",
+      "纠正预防措施和持续改进"
+    ],
+    "量具与检具使用": [
+      "通用量具与专用检具选择",
+      "零位校准和测量结果判定"
+    ],
+    "量具使用": [
+      "量具结构、量程与读数",
+      "测量基准和重复性误差"
+    ],
+    "铣削": [
+      "顺铣逆铣与铣刀类型",
+      "切削参数、刀路和振动控制"
+    ]
+  }
 };

@@ -67,6 +67,7 @@
     '铣削':['铣削加工原理','铣刀与切削参数'],
     '镗刀':['镗刀结构与选用','镗孔加工工艺']
   });
+  Object.assign(learning,data.learning||{});
   const maxDepth=Math.max(...data.chain.map(n=>n.depth));
   const chainPanels=Array.from({length:maxDepth+1},(_,depth)=>({label:depth?'一二三四五六七八九'[depth]+'级节点':'产业链',x:24+depth*166,w:150}));
   const majorX=24+(maxDepth+1)*166;
@@ -77,10 +78,16 @@
     {label:'知识点',x:majorX+984,w:270}
   ];
   const W=majorX+1276,pos=new Map(),nodeEls=new Map(),edges=[];
+  const chainByCode=new Map(data.chain.map(n=>[n.code,n]));
+  function isDescendant(code,ancestor){
+    let current=chainByCode.get(code);
+    while(current){if(current.code===ancestor)return true;current=chainByCode.get(current.parent)}
+    return false;
+  }
   let H=4200,scale=1,layoutExtra=0,selected=null,dragging=false,dragStart=null,suppressClick=false;
   const groupLabels=[];
   const elem=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
-  const fixedHeaders=document.getElementById('fixedHeaders');
+  const fixedHeaders=elem('div','pan-fixed-headers');document.querySelector('.app').append(fixedHeaders);
   function addNode(id,label,kind,x,y,w,h){
     const box=elem('div','pan-node '+kind,label);
     box.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
@@ -109,9 +116,10 @@
     const leaves=chain.filter(n=>!chain.some(child=>child.parent===n.code));
     const industryOrder=unique(chain.filter(n=>n.depth===0).map(n=>n.industry));
     leaves.sort((a,b)=>industryOrder.indexOf(a.industry)-industryOrder.indexOf(b.industry)||a.code.localeCompare(b.code));
-    const leafY=new Map(leaves.map((n,i)=>[n.code,mid-(leaves.length-1)*67+i*134]));
+    const leafStep=Math.min(134,(H-360)/Math.max(1,leaves.length-1));
+    const leafY=new Map(leaves.map((n,i)=>[n.code,mid-(leaves.length-1)*leafStep/2+i*leafStep]));
     chain.forEach(n=>{
-      const descendants=leaves.filter(leaf=>leaf.code.startsWith(n.code));
+      const descendants=leaves.filter(leaf=>isDescendant(leaf.code,n.code));
       const y=descendants.reduce((sum,leaf)=>sum+leafY.get(leaf.code),0)/descendants.length;
       const panel=chainPanels[n.depth];
       const box=addNode('c'+n.code,n.label,'chain'+(n.placeholder?' placeholder':''),panel.x+10,y-24,panel.w-20,48);
@@ -172,7 +180,7 @@
     const pairs=[];
     data.roles.forEach(role=>role.tasks.forEach(task=>{
       let keep=false;
-      if(selectedChain)keep=role.contexts.some(code=>code.startsWith(chainCode));
+      if(selectedChain)keep=role.contexts.some(code=>isDescendant(code,chainCode));
       else if(chosenTask)keep=task.id===chosenTask;
       else if(id===role.id)keep=true;
       else if(chosenSkill)keep=task.skills.includes(chosenSkill);
@@ -194,8 +202,8 @@
     const knowledgeIds=new Set(activeKnowledge.map(k=>'k'+knowledge.indexOf(k)));
     const roleContexts=unique(roles.flatMap(r=>r.contexts));
     const chainIds=new Set(data.chain.filter(n=>selectedChain
-      ?n.code.startsWith(chainCode)||chainCode.startsWith(n.code)
-      :roleContexts.some(code=>code.startsWith(n.code)||n.code.startsWith(code)))
+      ?isDescendant(n.code,chainCode)||isDescendant(chainCode,n.code)
+      :roleContexts.some(code=>isDescendant(code,n.code)||isDescendant(n.code,code)))
       .map(n=>'c'+n.code));
     return new Set(edges.filter(edge=>{
       if(edge.kind==='hierarchy')return chainIds.has(edge.source)&&chainIds.has(edge.target);
@@ -258,11 +266,12 @@
     if(redraw)drawEdges(true);
   }
   function updateHeaders(){
-    fixedHeaders.style.width=viewport.clientWidth+'px';
+    const rect=viewport.getBoundingClientRect();
+    fixedHeaders.style.cssText=`left:${rect.left}px;top:${rect.top}px;width:${viewport.clientWidth}px`;
     panels.forEach((p,i)=>{
       p.heading.style.left=((p.x+columnShift(i))*scale-viewport.scrollLeft)+'px';
       p.heading.style.width=(p.w*scale)+'px';
-      p.heading.style.fontSize=Math.max(12,Math.min(19,17*scale))+'px';
+      p.heading.style.fontSize=Math.max(10,Math.min(16,14*scale))+'px';
     });
   }
   function centerView(){
@@ -292,8 +301,6 @@
   viewport.addEventListener('pointerup',()=>{dragging=false;viewport.classList.remove('dragging');setTimeout(()=>suppressClick=false,0)});
   viewport.addEventListener('click',e=>{if(suppressClick)return;if(!e.target.closest('.pan-node')){selected=null;updateFocus()}});
   document.getElementById('resetView').onclick=()=>{selected=null;scale=1;applyScale();centerView();updateFocus()};
-  document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.28,scale*.9);applyScale();updateFrozenPositions()};
-  document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.6,scale*1.1);applyScale();updateFrozenPositions()};
   const fullscreenButton=document.getElementById('fullscreenView');
   fullscreenButton.onclick=async()=>{
     if(document.fullscreenElement)await document.exitFullscreen();
