@@ -72,10 +72,10 @@
   const chainPanels=Array.from({length:maxDepth+1},(_,depth)=>({label:depth?'一二三四五六七八九'[depth]+'级节点':'产业链',x:24+depth*166,w:150}));
   const majorX=24+(maxDepth+1)*166;
   const panels=[...chainPanels,
-    {label:'专业',x:majorX,w:150},{label:'岗位',x:majorX+166,w:160},
-    {label:'工作任务',x:majorX+342,w:350},
-    {label:'岗位能力',x:majorX+708,w:260},
-    {label:'知识点',x:majorX+984,w:270}
+    {label:'岗位',x:majorX,w:160},
+    {label:'工作任务',x:majorX+176,w:350},
+    {label:'岗位能力',x:majorX+542,w:260},
+    {label:'知识点',x:majorX+818,w:270}
   ];
   const W=majorX+1276,pos=new Map(),nodeEls=new Map(),edges=[];
   const chainByCode=new Map(data.chain.map(n=>[n.code,n]));
@@ -126,13 +126,15 @@
       box.title=n.placeholder?'原表未提供此层节点名称，以编码占位':n.code;
       if(n.parent)addEdge('c'+n.parent,'c'+n.code,'hierarchy');
     });
-    addNode('major',data.major,'major',panels[maxDepth+1].x+10,mid-27,130,54);
-    leaves.forEach(n=>addEdge('c'+n.code,'major','chain-map'));
+    leaves.forEach(n=>{
+      const leafId='c'+n.code;
+      data.roles.filter(role=>(role.chainLeaves||[]).includes(n.code))
+        .forEach(role=>addEdge(leafId,role.id,'chain-map'));
+    });
     bands.forEach(({role,top,center})=>{
-      addNode(role.id,role.label,'role',panels[maxDepth+2].x+12,center-24,136,48);
-      addEdge('major',role.id,'major-role');
+      addNode(role.id,role.label,'role',panels[maxDepth+1].x+12,center-24,136,48);
       role.tasks.forEach((task,i)=>{
-        addNode(task.id,task.label,'task',panels[maxDepth+3].x+12,top+30+i*55,326,46);
+        addNode(task.id,task.label,'task',panels[maxDepth+2].x+12,top+30+i*55,326,46);
         addEdge(role.id,task.id,'role-task');
       });
     });
@@ -141,8 +143,8 @@
     const knowledge=unique(skills.flatMap(s=>learning[s]||[]));
     const available=H-250,step=Math.min(116,available/(skills.length+qualities.length+2));
     let y=150;
-    const abilityX=panels[maxDepth+4].x+12,knowledgeX=panels[maxDepth+5].x+12;
-    function groupLabel(text,top){const label=elem('div','pan-group-label',text);label.style.cssText=`left:${abilityX}px;top:${top}px;width:236px`;nodesLayer.append(label);groupLabels.push({el:label,x:abilityX,panelIndex:maxDepth+4})}
+    const abilityX=panels[maxDepth+3].x+12,knowledgeX=panels[maxDepth+4].x+12;
+    function groupLabel(text,top){const label=elem('div','pan-group-label',text);label.style.cssText=`left:${abilityX}px;top:${top}px;width:236px`;nodesLayer.append(label);groupLabels.push({el:label,x:abilityX,panelIndex:maxDepth+3})}
     groupLabel(`技能 · ${skills.length}`,120);
     const skillIds=new Map(),qualityIds=new Map(),knowledgeIds=new Map();
     skills.forEach((s,i)=>{const id='s'+i;skillIds.set(s,id);addNode(id,s,'ability-skill',abilityX,y,236,40);y+=step});
@@ -163,7 +165,7 @@
       if(edge.inferred){const title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent='根据岗位技能与工作任务推断的关联';path.append(title)}
       svg.append(path);edge.el=path;
     });
-    document.getElementById('pathHint').textContent=`${unique(chain.map(n=>n.industry)).length} 条产业链 · ${leaves.length} 个末级节点 · 1 个专业 · ${data.roles.length} 种岗位 · ${skills.length} 项技能 · ${qualities.length} 项素养 · ${knowledge.length} 个知识点`;
+    document.getElementById('pathHint').textContent=`${unique(chain.map(n=>n.industry)).length} 条产业链 · ${leaves.length} 个末级节点 · ${data.roles.length} 种岗位 · ${skills.length} 项技能 · ${qualities.length} 项素养 · ${knowledge.length} 个知识点`;
     applyScale();updateFocus();
   }
   function focusEdges(id){
@@ -200,14 +202,14 @@
     const skillIds=new Set(activeSkills.map(s=>'s'+skills.indexOf(s)));
     const qualityIds=new Set(activeQualities.map(q=>'q'+qualities.indexOf(q)));
     const knowledgeIds=new Set(activeKnowledge.map(k=>'k'+knowledge.indexOf(k)));
-    const roleContexts=unique(roles.flatMap(r=>r.contexts));
+    const linkedLeaves=unique(roles.flatMap(r=>r.chainLeaves||[]));
     const chainIds=new Set(data.chain.filter(n=>selectedChain
       ?isDescendant(n.code,chainCode)||isDescendant(chainCode,n.code)
-      :roleContexts.some(code=>isDescendant(code,n.code)||isDescendant(n.code,code)))
+      :linkedLeaves.some(code=>isDescendant(code,n.code)))
       .map(n=>'c'+n.code));
     return new Set(edges.filter(edge=>{
       if(edge.kind==='hierarchy')return chainIds.has(edge.source)&&chainIds.has(edge.target);
-      if(edge.kind==='chain-map')return chainIds.has(edge.source);
+      if(edge.kind==='chain-map')return chainIds.has(edge.source)&&roleIds.has(edge.target);
       if(edge.kind==='major-role')return roleIds.has(edge.target);
       if(edge.kind==='role-task')return taskIds.has(edge.target);
       if(edge.kind==='task-skill')return taskIds.has(edge.source)&&skillIds.has(edge.target);
@@ -300,8 +302,6 @@
   viewport.addEventListener('pointerup',()=>{dragging=false;viewport.classList.remove('dragging');setTimeout(()=>suppressClick=false,0)});
   viewport.addEventListener('click',e=>{if(suppressClick)return;if(!e.target.closest('.pan-node')){selected=null;updateFocus()}});
   document.getElementById('resetView').onclick=()=>{selected=null;scale=1;applyScale();centerView();updateFocus()};
-  document.getElementById('zoomOut').onclick=()=>{scale=Math.max(.28,scale*.9);applyScale();updateFrozenPositions()};
-  document.getElementById('zoomIn').onclick=()=>{scale=Math.min(1.6,scale*1.1);applyScale();updateFrozenPositions()};
   document.getElementById('mapTitle').textContent=data.title;
   document.getElementById('sourceText').textContent=`数据来源：${data.source}；知识点由岗位技能推导`;
   build();requestAnimationFrame(centerView);
