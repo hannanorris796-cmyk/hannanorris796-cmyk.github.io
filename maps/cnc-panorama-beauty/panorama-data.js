@@ -1,4 +1,5 @@
-// Role to terminal industry node paths and task-ability links.\nwindow.PANORAMA_DATA={
+// Role to terminal industry node paths and task-ability links.
+window.PANORAMA_DATA={
   "title": "数控技术产业全景图",
   "source": "最早表＋产业链编码补充表＋v2表＋完整节点路径表／数控技术",
   "major": "数控技术",
@@ -3411,4 +3412,4 @@
       "切削参数、刀路和振动控制"
     ]
   }
-};\n
+};
